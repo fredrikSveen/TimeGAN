@@ -21,6 +21,15 @@ from metrics.visualization_metrics import visualization
 # 4. Analysis
 from utils import list_to_df
 
+# Save generated data to csv
+x = datetime.datetime.now()
+
+timestamp = x.strftime("%d_%m_%y__%Hh%M")
+generated_df = list_to_df(generated_data)
+filepath = f'generated_data/gen_data_norm{timestamp}'
+generated_df.to_csv(f'{filepath}.csv')
+generated_df.to_csv(f'{filepath}_indexless.csv', index=False)
+
 
 # get the start time
 st = time.time()
@@ -56,7 +65,7 @@ print('Finish Synthetic Data Generation')
 # Save generated data to csv
 x = datetime.datetime.now()
 
-timestamp = x.strftime("%d/%m/%y_%Hh%M")
+timestamp = x.strftime("%d_%m_%y__%Hh%M")
 generated_df = list_to_df(generated_data)
 filepath = f'generated_data/gen_data_norm{timestamp}'
 generated_df.to_csv(f'{filepath}.csv')
