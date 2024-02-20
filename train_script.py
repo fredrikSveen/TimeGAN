@@ -6,6 +6,7 @@ from __future__ import print_function
 import numpy as np
 import pandas as pd
 import datetime
+import time
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -20,6 +21,9 @@ from metrics.visualization_metrics import visualization
 # 4. Analysis
 from utils import list_to_df
 
+
+# get the start time
+st = time.time()
 
 ## Data loading
 data_name = 'sensor'
@@ -57,3 +61,10 @@ generated_df = list_to_df(generated_data)
 filepath = f'generated_data/gen_data_norm{timestamp}'
 generated_df.to_csv(f'{filepath}.csv')
 generated_df.to_csv(f'{filepath}_indexless.csv', index=False)
+
+# get the end time
+et = time.time()
+
+# get the execution time
+elapsed_time = et - st
+print('Execution time:', elapsed_time, 'seconds')
