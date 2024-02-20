@@ -21,16 +21,6 @@ from metrics.visualization_metrics import visualization
 # 4. Analysis
 from utils import list_to_df
 
-# Save generated data to csv
-x = datetime.datetime.now()
-
-timestamp = x.strftime("%d_%m_%y__%Hh%M")
-generated_df = pd.DataFrame(np.array([1,2,3,4,5,6,7]))
-filepath = f'generated_data/gen_data_norm{timestamp}'
-generated_df.to_csv(f'{filepath}.csv')
-generated_df.to_csv(f'{filepath}_indexless.csv', index=False)
-
-
 # get the start time
 st = time.time()
 
