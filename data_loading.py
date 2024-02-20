@@ -87,14 +87,16 @@ def real_data_loading (data_name, seq_len):
   Returns:
     - data: preprocessed data.
   """  
-  assert data_name in ['stock','energy','sensor']
+  assert data_name in ['stock','energy','sensor','generated']
   
   if data_name == 'stock':
     ori_data = np.loadtxt('data/stock_data.csv', delimiter = ",",skiprows = 1)
   elif data_name == 'energy':
     ori_data = np.loadtxt('data/energy_data.csv', delimiter = ",",skiprows = 1)
   elif data_name == 'sensor':
-    ori_data = np.loadtxt('data/sensor_data_indexless.csv', delimiter = ",",skiprows = 1)
+    ori_data = np.loadtxt('data/sensor_data_norm2_indexless_10days.csv', delimiter = ",",skiprows = 1)
+  elif data_name == 'generated':
+    ori_data = np.loadtxt('generated_data/gen_data2_indexless.csv', delimiter = ",", skiprows = 1)
         
   # Flip the data to make chronological data
   ori_data = ori_data[::-1]

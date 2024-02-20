@@ -220,6 +220,9 @@ def timegan (ori_data, parameters):
   G_solver = tf.train.AdamOptimizer().minimize(G_loss, var_list = g_vars + s_vars)      
   GS_solver = tf.train.AdamOptimizer().minimize(G_loss_S, var_list = g_vars + s_vars)   
         
+  # Saver for saving model to file
+  saver = tf.train.Saver()
+
   ## TimeGAN training   
   sess = tf.Session()
   sess.run(tf.global_variables_initializer())
@@ -292,7 +295,10 @@ def timegan (ori_data, parameters):
     
   ## Synthetic data generation
   Z_mb = random_generator(no, z_dim, ori_time, max_seq_len)
-  generated_data_curr = sess.run(X_hat, feed_dict={Z: Z_mb, X: ori_data, T: ori_time})    
+  generated_data_curr = sess.run(X_hat, feed_dict={Z: Z_mb, X: ori_data, T: ori_time})  
+
+  ## Save the trained model
+  saver.save(sess, 'trained_models/model1')  
     
   generated_data = list()
     

@@ -23,6 +23,7 @@ utils.py
 ## Necessary Packages
 import numpy as np
 import tensorflow as tf
+import pandas as pd
 
 
 def train_test_divide (data_x, data_x_hat, data_t, data_t_hat, train_rate = 0.8):
@@ -143,3 +144,11 @@ def batch_generator(data, time, batch_size):
   T_mb = list(time[i] for i in train_idx)
   
   return X_mb, T_mb
+
+def list_to_df(list_):
+    generated_df = pd.DataFrame()
+
+    for mat in list_:
+        new_row = pd.Series(mat[0])
+        generated_df = generated_df.append(new_row, ignore_index=True)
+    return generated_df
