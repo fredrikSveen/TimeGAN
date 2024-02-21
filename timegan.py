@@ -22,7 +22,7 @@ import numpy as np
 from utils import extract_time, rnn_cell, random_generator, batch_generator
 
 
-def timegan (ori_data, parameters):
+def timegan (ori_data, parameters, reproduce=False):
   """TimeGAN function.
   
   Use original data as training set to generater synthetic data (time-series)
@@ -232,7 +232,7 @@ def timegan (ori_data, parameters):
     
   for itt in range(iterations):
     # Set mini-batch
-    X_mb, T_mb = batch_generator(ori_data, ori_time, batch_size)           
+    X_mb, T_mb = batch_generator(ori_data, ori_time, batch_size, reproduce=reproduce)           
     # Train embedder        
     _, step_e_loss = sess.run([E0_solver, E_loss_T0], feed_dict={X: X_mb, T: T_mb})        
     # Checkpoint
@@ -246,9 +246,9 @@ def timegan (ori_data, parameters):
     
   for itt in range(iterations):
     # Set mini-batch
-    X_mb, T_mb = batch_generator(ori_data, ori_time, batch_size)    
+    X_mb, T_mb = batch_generator(ori_data, ori_time, batch_size, reproduce=reproduce)    
     # Random vector generation   
-    Z_mb = random_generator(batch_size, z_dim, T_mb, max_seq_len)
+    Z_mb = random_generator(batch_size, z_dim, T_mb, max_seq_len, reproduce=reproduce)
     # Train generator       
     _, step_g_loss_s = sess.run([GS_solver, G_loss_S], feed_dict={Z: Z_mb, X: X_mb, T: T_mb})       
     # Checkpoint
@@ -264,9 +264,9 @@ def timegan (ori_data, parameters):
     # Generator training (twice more than discriminator training)
     for kk in range(2):
       # Set mini-batch
-      X_mb, T_mb = batch_generator(ori_data, ori_time, batch_size)               
+      X_mb, T_mb = batch_generator(ori_data, ori_time, batch_size, reproduce=reproduce)               
       # Random vector generation
-      Z_mb = random_generator(batch_size, z_dim, T_mb, max_seq_len)
+      Z_mb = random_generator(batch_size, z_dim, T_mb, max_seq_len, reproduce=reproduce)
       # Train generator
       _, step_g_loss_u, step_g_loss_s, step_g_loss_v = sess.run([G_solver, G_loss_U, G_loss_S, G_loss_V], feed_dict={Z: Z_mb, X: X_mb, T: T_mb})
        # Train embedder        
@@ -274,9 +274,9 @@ def timegan (ori_data, parameters):
            
     # Discriminator training        
     # Set mini-batch
-    X_mb, T_mb = batch_generator(ori_data, ori_time, batch_size)           
+    X_mb, T_mb = batch_generator(ori_data, ori_time, batch_size, reproduce=reproduce)           
     # Random vector generation
-    Z_mb = random_generator(batch_size, z_dim, T_mb, max_seq_len)
+    Z_mb = random_generator(batch_size, z_dim, T_mb, max_seq_len, reproduce=reproduce)
     # Check discriminator loss before updating
     check_d_loss = sess.run(D_loss, feed_dict={X: X_mb, T: T_mb, Z: Z_mb})
     # Train discriminator (only when the discriminator does not work well)
@@ -294,7 +294,7 @@ def timegan (ori_data, parameters):
   print('Finish Joint Training')
     
   ## Synthetic data generation
-  Z_mb = random_generator(no, z_dim, ori_time, max_seq_len)
+  Z_mb = random_generator(no, z_dim, ori_time, max_seq_len, reproduce=reproduce)
   generated_data_curr = sess.run(X_hat, feed_dict={Z: Z_mb, X: ori_data, T: ori_time})  
 
   ## Save the trained model
