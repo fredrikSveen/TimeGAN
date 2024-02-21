@@ -26,7 +26,7 @@ import tensorflow as tf
 import pandas as pd
 
 
-def train_test_divide (data_x, data_x_hat, data_t, data_t_hat, train_rate = 0.8):
+def train_test_divide (data_x, data_x_hat, data_t, data_t_hat, train_rate = 0.8, reproduce=False):
   """Divide train and test data for both original and synthetic data.
   
   Args:
@@ -38,7 +38,11 @@ def train_test_divide (data_x, data_x_hat, data_t, data_t_hat, train_rate = 0.8)
   """
   # Divide train/test index (original data)
   no = len(data_x)
-  idx = np.random.permutation(no)
+  if reproduce:
+    seed = 1
+    idx = np.random.default_rng(seed=seed).permutation(no)
+  else:
+    idx = np.random.permutation(no)
   train_idx = idx[:int(no*train_rate)]
   test_idx = idx[int(no*train_rate):]
     
@@ -103,7 +107,7 @@ def rnn_cell(module_name, hidden_dim):
   return rnn_cell
 
 
-def random_generator (batch_size, z_dim, T_mb, max_seq_len):
+def random_generator (batch_size, z_dim, T_mb, max_seq_len, reproduce=False):
   """Random vector generation.
   
   Args:
@@ -116,15 +120,23 @@ def random_generator (batch_size, z_dim, T_mb, max_seq_len):
     - Z_mb: generated random vector
   """
   Z_mb = list()
-  for i in range(batch_size):
-    temp = np.zeros([max_seq_len, z_dim])
-    temp_Z = np.random.uniform(0., 1, [T_mb[i], z_dim])
-    temp[:T_mb[i],:] = temp_Z
-    Z_mb.append(temp_Z)
+  s = 1 #random seed for data generation
+  if reproduce:
+    for i in range(batch_size):
+      temp = np.zeros([max_seq_len, z_dim])
+      temp_Z = np.random.default_rng(seed=s).uniform(0., 1, [T_mb[i], z_dim])
+      temp[:T_mb[i],:] = temp_Z
+      Z_mb.append(temp_Z)
+  else:
+    for i in range(batch_size):
+      temp = np.zeros([max_seq_len, z_dim])
+      temp_Z = np.random.uniform(0., 1, [T_mb[i], z_dim])
+      temp[:T_mb[i],:] = temp_Z
+      Z_mb.append(temp_Z)
   return Z_mb
 
 
-def batch_generator(data, time, batch_size):
+def batch_generator(data, time, batch_size, reproduce=False):
   """Mini-batch generator.
   
   Args:
@@ -137,7 +149,11 @@ def batch_generator(data, time, batch_size):
     - T_mb: time information in each batch
   """
   no = len(data)
-  idx = np.random.permutation(no)
+  if reproduce:
+    seed = 1
+    idx = np.random.default_rng(seed=seed).permutation(no)
+  else:
+    idx = np.random.permutation(no)
   train_idx = idx[:batch_size]     
             
   X_mb = list(data[i] for i in train_idx)

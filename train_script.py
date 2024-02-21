@@ -49,7 +49,7 @@ parameters['iterations'] = 10000
 parameters['batch_size'] = 128
 
 # Run TimeGAN
-generated_data = timegan(ori_data, parameters)   
+generated_data = timegan(ori_data, parameters, reproduce=True)   
 print('Finish Synthetic Data Generation')
 
 # Save generated data to csv
