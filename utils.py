@@ -127,6 +127,7 @@ def random_generator (batch_size, z_dim, T_mb, max_seq_len, reproduce=False):
       temp_Z = np.random.default_rng(seed=s).uniform(0., 1, [T_mb[i], z_dim])
       temp[:T_mb[i],:] = temp_Z
       Z_mb.append(temp_Z)
+      s += 1
   else:
     for i in range(batch_size):
       temp = np.zeros([max_seq_len, z_dim])
