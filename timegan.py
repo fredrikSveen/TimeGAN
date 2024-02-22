@@ -171,7 +171,7 @@ def timegan (ori_data, parameters, reproduce=False):
   H_hat_supervise = supervisor(H, T)
     
   # Synthetic data
-  X_hat = recovery(H_hat, T)
+  X_hat = tf.add(recovery(H_hat, T), 0, name="op_to_restore")
     
   # Discriminator
   Y_fake = discriminator(H_hat, T)
@@ -311,3 +311,70 @@ def timegan (ori_data, parameters, reproduce=False):
   generated_data = generated_data + min_val
     
   return generated_data
+
+
+def timegan_from_pretrained(modelname, ori_data, parameters, reproduce=False):
+  # Basic Parameters
+  no, seq_len, dim = np.asarray(ori_data).shape
+    
+  # Maximum sequence length and each sequence length
+  ori_time, max_seq_len = extract_time(ori_data)
+  
+  def MinMaxScaler(data):
+    """Min-Max Normalizer.
+    
+    Args:
+      - data: raw data
+      
+    Returns:
+      - norm_data: normalized data
+      - min_val: minimum values (for renormalization)
+      - max_val: maximum values (for renormalization)
+    """    
+    min_val = np.min(np.min(data, axis = 0), axis = 0)
+    data = data - min_val
+      
+    max_val = np.max(np.max(data, axis = 0), axis = 0)
+    norm_data = data / (max_val + 1e-7)
+      
+    return norm_data, min_val, max_val
+  
+  # Normalization
+  ori_data, min_val, max_val = MinMaxScaler(ori_data)
+              
+  ## Build a RNN networks          
+  
+  # Network Parameters
+  hidden_dim   = parameters['hidden_dim'] 
+  num_layers   = parameters['num_layer']
+  iterations   = parameters['iterations']
+  batch_size   = parameters['batch_size']
+  module_name  = parameters['module'] 
+  z_dim        = dim
+  gamma        = 1
+
+  with tf.Session() as sess:
+    saver = tf.train.import_meta_graph(modelname)
+    saver.restore(sess,tf.train.latest_checkpoint('trained_models/./'))
+    graph = tf.get_default_graph()
+
+    #Paramters
+    X = graph.get_tensor_by_name("myinput_x:0")
+    Z = graph.get_tensor_by_name("myinput_z:0")
+    T = graph.get_tensor_by_name("myinput_t:0")
+
+    X_hat = graph.get_tensor_by_name("op_to_restore:0")
+
+    Z_mb = random_generator(no, z_dim, ori_time, max_seq_len, reproduce=reproduce)
+    generated_data_curr = sess.run(X_hat, feed_dict={Z: Z_mb, X: ori_data, T: ori_time})
+    generated_data = list()
+    
+    for i in range(no):
+      temp = generated_data_curr[i,:ori_time[i],:]
+      generated_data.append(temp)
+          
+    # Renormalization
+    generated_data = generated_data * max_val
+    generated_data = generated_data + min_val
+      
+    return generated_data
