@@ -171,7 +171,7 @@ def timegan (ori_data, parameters, reproduce=False):
   H_hat_supervise = supervisor(H, T)
     
   # Synthetic data
-  X_hat = tf.add(recovery(H_hat, T), 0, name="op_to_restore")
+  X_hat = tf.add(recovery(H_hat, T), 0, name="myinput_xhat")
     
   # Discriminator
   Y_fake = discriminator(H_hat, T)
@@ -363,7 +363,7 @@ def timegan_from_pretrained(modelname, ori_data, parameters, reproduce=False):
     Z = graph.get_tensor_by_name("myinput_z:0")
     T = graph.get_tensor_by_name("myinput_t:0")
 
-    X_hat = graph.get_tensor_by_name("op_to_restore:0")
+    X_hat = graph.get_tensor_by_name("myinput_xhat:0")
 
     Z_mb = random_generator(no, z_dim, ori_time, max_seq_len, reproduce=reproduce)
     generated_data_curr = sess.run(X_hat, feed_dict={Z: Z_mb, X: ori_data, T: ori_time})
