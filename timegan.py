@@ -20,6 +20,7 @@ Note: Use original data as training set to generater synthetic data (time-series
 import tensorflow as tf
 import numpy as np
 from utils import extract_time, rnn_cell, random_generator, batch_generator
+import os
 
 
 def timegan (ori_data, parameters, reproduce=False):
@@ -222,6 +223,7 @@ def timegan (ori_data, parameters, reproduce=False):
         
   # Saver for saving model to file
   saver = tf.train.Saver()
+  os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
   ## TimeGAN training 
   config = tf.ConfigProto(allow_soft_placement=True, log_device_placement=True)
