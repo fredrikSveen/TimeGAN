@@ -224,7 +224,7 @@ def timegan (ori_data, parameters, reproduce=False):
   saver = tf.train.Saver()
 
   ## TimeGAN training   
-  sess = tf.Session()
+  sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
   sess.run(tf.global_variables_initializer())
     
   # 1. Embedding network training
