@@ -223,12 +223,8 @@ def timegan (ori_data, parameters, reproduce=False):
         
   # Saver for saving model to file
   saver = tf.train.Saver()
-  os.environ["CUDA_VISIBLE_DEVICES"] = "1"
-
-  ## TimeGAN training 
-  config = tf.ConfigProto(allow_soft_placement=True, log_device_placement=True)
-  config.gpu_options.allow_growth = True
-  sess = tf.Session(config=config)
+  
+  sess = tf.Session()
   sess.run(tf.global_variables_initializer())
     
   # 1. Embedding network training

@@ -58,7 +58,7 @@ time_stamps = dfs_dict["PDT-92534"].index
 
 full_df.index = time_stamps
 
-filename = f'generated_data/sensor_{startdate.strftime("%d_%m_%y")}to{enddate.strftime("%d_%m_%y")}'
+filename = f'data/sensor_{startdate.strftime("%d_%m_%y")}to{enddate.strftime("%d_%m_%y")}'
 
 full_df.to_csv(filename + '.csv')
 full_df.to_csv(filename + '_indexless.csv', index=False)
