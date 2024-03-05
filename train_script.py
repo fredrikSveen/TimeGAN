@@ -28,7 +28,7 @@ st = time.time()
 ## Data loading
 data_name = 'sensor'
 try:
-  seq_len = sys.argv[1]
+  seq_len = int(sys.argv[1])
   print(f'Sequence length: {seq_len}')
 except IndexError:
   seq_len = 24
