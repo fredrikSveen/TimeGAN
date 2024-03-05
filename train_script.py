@@ -74,5 +74,5 @@ et = time.time()
 elapsed_time = et - st
 h = elapsed_time//(60*60)
 m = (elapsed_time - h*(60*60))//60
-s = elapsed_time - h*(60*60) - m*60
+s = round(elapsed_time - h*(60*60) - m*60,1)
 print(f'Execution time: {h}h{m}m{s}s')
