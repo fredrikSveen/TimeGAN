@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import sys
 import numpy as np
 import pandas as pd
 import datetime
@@ -26,7 +27,12 @@ st = time.time()
 
 ## Data loading
 data_name = 'sensor'
-seq_len = 24
+try:
+  seq_len = sys.argv[1]
+  print(f'Sequence length: {seq_len}')
+except IndexError:
+  seq_len = 24
+  print(f'The sequence length was not specified. The standard length of {seq_len} was used')
 
 if data_name in ['stock', 'energy', 'sensor']:
   ori_data = real_data_loading(data_name, seq_len)
