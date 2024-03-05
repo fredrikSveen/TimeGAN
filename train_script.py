@@ -66,4 +66,7 @@ et = time.time()
 
 # get the execution time
 elapsed_time = et - st
-print('Execution time:', elapsed_time, 'seconds')
+h = elapsed_time//(60*60)
+m = (elapsed_time - h*(60*60))//60
+s = elapsed_time - h*(60*60) - m*60
+print(f'Execution time: {h}h{m}m{s}s')
