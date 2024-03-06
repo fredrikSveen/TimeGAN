@@ -26,7 +26,7 @@ from utils import list_to_df
 st = time.time()
 
 ## Data loading
-data_name = 'sensor'
+data_name = 'stock'
 try:
   seq_len = int(sys.argv[1])
   print(f'Sequence length: {seq_len}')
