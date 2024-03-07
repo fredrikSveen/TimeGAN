@@ -20,7 +20,6 @@ Note: Use original data as training set to generater synthetic data (time-series
 import tensorflow as tf
 import numpy as np
 from utils import extract_time, rnn_cell, random_generator, batch_generator
-import os
 
 
 def timegan (ori_data, parameters, reproduce=False):
