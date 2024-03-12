@@ -26,7 +26,7 @@ from utils import list_to_df
 st = time.time()
 
 ## Data loading
-data_name = 'sensor'
+data_name = 'stock'
 try:
   seq_len = int(sys.argv[1])
   print(f'Sequence length: {seq_len}')
@@ -63,7 +63,7 @@ x = datetime.datetime.now()
 
 timestamp = x.strftime("%d_%m_%y__%Hh%M")
 generated_df = list_to_df(generated_data)
-filepath = f'generated_data/gen_data_norm{timestamp}'
+filepath = f'generated_data/gen_{data_name}_norm{timestamp}'
 generated_df.to_csv(f'{filepath}.csv')
 generated_df.to_csv(f'{filepath}_indexless.csv', index=False)
 
@@ -72,7 +72,7 @@ et = time.time()
 
 # get the execution time
 elapsed_time = et - st
-h = elapsed_time//(60*60)
-m = (elapsed_time - h*(60*60))//60
+h = round(elapsed_time//(60*60), 0)
+m = round((elapsed_time - h*(60*60))//60, 0)
 s = round(elapsed_time - h*(60*60) - m*60,1)
 print(f'Execution time: {h}h{m}m{s}s')
