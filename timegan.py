@@ -19,6 +19,8 @@ Note: Use original data as training set to generater synthetic data (time-series
 # Necessary Packages
 import tensorflow as tf
 import numpy as np
+import pandas as pd
+import datetime
 from utils import extract_time, rnn_cell, random_generator, batch_generator, list_to_df
 
 
@@ -294,7 +296,12 @@ def timegan (ori_data, parameters, reproduce=False):
     
   ## Synthetic data generation
   Z_mb = random_generator(no, z_dim, ori_time, max_seq_len, reproduce=reproduce)
-  generated_data_curr = sess.run(X_hat, feed_dict={Z: Z_mb, X: ori_data, T: ori_time})  
+  generated_data_curr = sess.run(X_hat, feed_dict={Z: Z_mb, X: ori_data, T: ori_time})
+
+  x = datetime.datetime.now()
+  timestamp = x.strftime("%d_%m_%y__%Hh%M")
+  gen_data_df = pd.DataFrame(generated_data_curr)
+  gen_data_df.to_csv(f'generated_dataframes/frames_{timestamp}.csv')
 
   ## Save the trained model
   saver.save(sess, 'trained_models/model1')  
