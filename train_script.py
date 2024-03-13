@@ -26,7 +26,7 @@ from utils import list_to_df
 st = time.time()
 
 ## Data loading
-data_name = 'sensor'
+data_name = 'stock'
 try:
   seq_len = int(sys.argv[1])
   print(f'Sequence length: {seq_len}')
@@ -55,7 +55,7 @@ parameters['iterations'] = 10000
 parameters['batch_size'] = 128
 
 # Run TimeGAN
-generated_data = timegan(ori_data, parameters, reproduce=True)   
+generated_data = timegan(ori_data, parameters, reproduce=False)   
 print('Finish Synthetic Data Generation')
 
 # Save generated data to csv

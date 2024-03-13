@@ -19,7 +19,7 @@ Note: Use original data as training set to generater synthetic data (time-series
 # Necessary Packages
 import tensorflow as tf
 import numpy as np
-from utils import extract_time, rnn_cell, random_generator, batch_generator
+from utils import extract_time, rnn_cell, random_generator, batch_generator, list_to_df
 
 
 def timegan (ori_data, parameters, reproduce=False):
@@ -370,6 +370,9 @@ def timegan_from_pretrained(modelname, ori_data, parameters, reproduce=False):
     
     for i in range(no):
       temp = generated_data_curr[i,:ori_time[i],:]
+      temp_df = list_to_df(temp)
+      temp_df.plot(subplots=True, layout=(3,3))
+      print(f'Temp: {len(temp)}')
       generated_data.append(temp)
           
     # Renormalization
