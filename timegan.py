@@ -300,9 +300,9 @@ def timegan (ori_data, parameters, reproduce=False):
 
   x = datetime.datetime.now()
   timestamp = x.strftime("%d_%m_%y__%Hh%M")
-  gen_data_df = pd.DataFrame(generated_data_curr[0])
-  gen_data_df1 = pd.DataFrame(generated_data_curr[1])
-  gen_data_df2 = pd.DataFrame(generated_data_curr[2])
+  gen_data_df = pd.DataFrame(generated_data_curr[-1])
+  gen_data_df1 = pd.DataFrame(generated_data_curr[-2])
+  gen_data_df2 = pd.DataFrame(generated_data_curr[-3])
 
   gen_data_df.to_csv(f'generated_dataframes/frame0_{timestamp}.csv')
   gen_data_df1.to_csv(f'generated_dataframes/frame1_{timestamp}.csv')
