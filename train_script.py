@@ -26,7 +26,7 @@ from utils import list_to_df
 st = time.time()
 
 ## Data loading
-data_name = 'sensor'
+data_name = 'sine'
 try:
   seq_len = int(sys.argv[1])
   print(f'Sequence length: {seq_len}')
@@ -38,7 +38,7 @@ if data_name in ['stock', 'energy', 'sensor']:
   ori_data = real_data_loading(data_name, seq_len)
 elif data_name == 'sine':
   # Set number of samples and its dimensions
-  no, dim = 10000, 5
+  no, dim = 1000, 5
   ori_data = sine_data_generation(no, seq_len, dim)
     
 print(data_name + ' dataset is ready.')
