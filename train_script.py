@@ -66,7 +66,7 @@ timestamp = x.strftime("%d_%m_%y__%Hh%M")
 # generated_df = list_to_df(generated_data)
 filepath = f'generated_data/gen_{data_name}_norm{timestamp}.json'
 with open(filepath, 'w') as file:
-    json.dump(generated_data, file)
+    json.dump(generated_data.tolist(), file)
 
 # generated_df.to_csv(f'{filepath}.csv')
 # generated_df.to_csv(f'{filepath}_indexless.csv', index=False)
