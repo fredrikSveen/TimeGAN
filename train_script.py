@@ -39,7 +39,7 @@ if data_name in ['stock', 'energy', 'sensor']:
   ori_data = real_data_loading(data_name, seq_len)
 elif data_name == 'sine':
   # Set number of samples and its dimensions
-  no, dim = 1000, 5
+  no, dim = 10000, 5
   ori_data = sine_data_generation(no, seq_len, dim)
     
 print(data_name + ' dataset is ready.')
