@@ -60,7 +60,7 @@ def sine_data_generation (no, seq_len, dim):
     # For each feature
     for k in range(dim):
       # Randomly drawn frequency and phase
-      freq = np.random.uniform(0, 0.2)            
+      freq = np.random.uniform(0, 0.3)            
       phase = np.random.uniform(0, 0.1)
           
       # Generate sine signal based on the drawn frequency and phase
