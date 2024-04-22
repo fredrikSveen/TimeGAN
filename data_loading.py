@@ -130,7 +130,7 @@ def sine_data_loading (n_samples, dim, seq_len):
     - data: preprocessed data.
   """
   
-  ori_data = np.ndarray()     #Array to hold data
+  ori_data = np.empty(1)    #Array to hold data
   try:
     ori_data = np.loadtxt(f'sine_data/sine_123_{n_samples}_{dim}.csv', delimiter = ",",skiprows = 1)
   except:
