@@ -117,3 +117,39 @@ def real_data_loading (data_name, seq_len):
   #   data.append(temp_data[idx[i]])
     
   return temp_data
+
+
+def sine_data_loading (n_samples, dim, seq_len):
+  """Load and preprocess pre-generated sine data
+  
+  Args:
+    - data_name: stock or energy
+    - seq_len: sequence length
+    
+  Returns:
+    - data: preprocessed data.
+  """
+  
+  try:
+    ori_data = np.loadtxt(f'sine_data/sine_123_{n_samples}_{dim}.csv', delimiter = ",",skiprows = 1)
+  except:
+    print(f'There exist no data file with the parameters given: n_samples={n_samples} and dim={dim}')
+
+        
+  # Normalize the data
+  ori_data = MinMaxScaler(ori_data)
+    
+  # Preprocess the dataset
+  temp_data = []    
+  # Cut data by sequence length
+  for i in range(0, len(ori_data) - seq_len):
+    _x = ori_data[i:i + seq_len]
+    temp_data.append(_x)
+        
+  # # Mix the datasets (to make it similar to i.i.d)
+  # idx = np.random.permutation(len(temp_data))    
+  # data = []
+  # for i in range(len(temp_data)):
+  #   data.append(temp_data[idx[i]])
+    
+  return temp_data
