@@ -38,7 +38,7 @@ dim = 1
 
 for n_samples in n_samples_list:
 
-    ori_data = sine_data_loading(n_samples, seq_len, dim)
+    ori_data = sine_data_loading(n_samples, dim, seq_len)
         
     print(data_name + ' dataset is ready.')
 
