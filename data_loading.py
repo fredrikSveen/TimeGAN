@@ -130,11 +130,10 @@ def sine_data_loading (n_samples, dim, seq_len):
     - data: preprocessed data.
   """
   
-  ori_data = np.empty(1)    #Array to hold data
-  try:
-    ori_data = np.loadtxt(f'sine_data/sine_123_{n_samples}_{dim}.csv', delimiter = ",",skiprows = 1)
-  except:
-    print(f'There exist no data file with the parameters given: n_samples={n_samples} and dim={dim}')
+
+  ori_data = np.loadtxt(f'sine_data/sine_123_{n_samples}_{dim}.csv', delimiter = ",",skiprows = 1)
+
+  # print(f'There exist no data file with the parameters given: n_samples={n_samples} and dim={dim}')
 
   print(f'The shape of the original data is now {ori_data.shape}')
         
