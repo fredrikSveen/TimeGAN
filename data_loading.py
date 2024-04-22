@@ -136,6 +136,7 @@ def sine_data_loading (n_samples, dim, seq_len):
   except:
     print(f'There exist no data file with the parameters given: n_samples={n_samples} and dim={dim}')
 
+  print(f'The shape of the original data is now {ori_data.shape}')
         
   # Normalize the data
   ori_data = MinMaxScaler(ori_data)
