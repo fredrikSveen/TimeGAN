@@ -32,7 +32,7 @@ parameters['batch_size'] = 128
 
 ## Data loading
 data_name = 'sine'
-seq_len = 25
+seq_len = 200
 n_samples = 10000
 n_iterations_list = [1000, 10000, 50000]
 dim = 1
@@ -53,7 +53,7 @@ for n_iterations in n_iterations_list:
 
     timestamp = x.strftime("%d%m%y_%Hh%M")
     # generated_df = list_to_df(generated_data)
-    filepath = f'synthetic_sines/syn_sine_{n_iterations}_{dim}_{timestamp}.json'
+    filepath = f'synthetic_sines/syn_sine_{n_iterations}_{dim}_{seq_len}_{timestamp}.json'
     with open(filepath, 'w') as file:
         json.dump(generated_data.tolist(), file)
 
