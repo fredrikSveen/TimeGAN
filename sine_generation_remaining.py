@@ -34,9 +34,9 @@ data_name = 'sine'
 n_samples = 1000
 
 # Generating missing 1d sine with 1000 iterations
-dim = 1
-seq_len = 25
-n_iterations = 1000
+dim = 6
+seq_len = 200
+n_iterations = 50000
 ori_data = sine_data_loading(n_samples, dim, seq_len)
             
 print(data_name + ' dataset is ready.')
@@ -60,7 +60,7 @@ with open(filepath, 'w') as file:
 # Generating missing 9d sine with 50 000 iterations
 
 dim = 9
-seq_len = 200
+seq_len = 25
 n_iterations = 50000
 ori_data = sine_data_loading(n_samples, dim, seq_len)
             
