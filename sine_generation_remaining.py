@@ -36,7 +36,7 @@ n_samples = 1000
 # Generating missing 1d sine with 1000 iterations
 dim = 6
 seq_len = 200
-n_iterations = 50000
+n_iterations = 10000
 ori_data = sine_data_loading(n_samples, dim, seq_len)
             
 print(data_name + ' dataset is ready.')
@@ -56,30 +56,6 @@ filepath = f'synthetic_sines/syn_sine_{n_iterations}_{dim}_{seq_len}_{timestamp}
 with open(filepath, 'w') as file:
     json.dump(generated_data.tolist(), file)
 
-
-# Generating missing 9d sine with 50 000 iterations
-
-dim = 9
-seq_len = 25
-n_iterations = 50000
-ori_data = sine_data_loading(n_samples, dim, seq_len)
-            
-print(data_name + ' dataset is ready.')
-print(f'Using {dim} dimensions and {n_iterations} iterations')
-
-# Run TimeGAN
-parameters['iterations'] = n_iterations
-generated_data = timegan(ori_data, parameters, reproduce=False)   
-print('Finish Synthetic Data Generation')
-
-# Save generated data to csv
-x = datetime.datetime.now()
-
-timestamp = x.strftime("%d%m%y_%Hh%M")
-# generated_df = list_to_df(generated_data)
-filepath = f'synthetic_sines/syn_sine_{n_iterations}_{dim}_{seq_len}_{timestamp}.json'
-with open(filepath, 'w') as file:
-    json.dump(generated_data.tolist(), file)
 
 # get the end time
 et = time.time()
