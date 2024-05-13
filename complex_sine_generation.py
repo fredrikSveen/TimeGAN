@@ -33,7 +33,7 @@ parameters['batch_size'] = 128
 data_name = 'sine'
 seq_len = 100
 n_samples = 1000
-n_iterations_list = [1000, 10000, 50000]
+n_iterations_list = [100000]
 dim = 6
 
 
