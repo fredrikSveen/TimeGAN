@@ -155,7 +155,7 @@ def complex_sine_loading (n_samples, dim, seq_len):
   Returns:
     - data: preprocessed data.
   """
-  ori_data = np.loadtxt(f'complex_sine_data/comp_sine_123_{n_samples}_{dim}.csv', delimiter = ",",skiprows = 1)
+  ori_data = np.loadtxt(f'complex_sine_data/extra_comp_sine_123_{n_samples}_{dim}.csv', delimiter = ",",skiprows = 1)
 
   print(f'The shape of the original data is now {ori_data.shape}')
         
