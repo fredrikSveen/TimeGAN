@@ -22,6 +22,7 @@ data_loading.py
 
 ## Necessary Packages
 import numpy as np
+import os
 
 
 def MinMaxScaler(data):
@@ -155,7 +156,9 @@ def complex_sine_loading (n_samples, dim, seq_len):
   Returns:
     - data: preprocessed data.
   """
-  ori_data = np.loadtxt(f'complex_sine_data/comp_sine_123_{n_samples}_{dim}.csv', delimiter = ",",skiprows = 1)
+  data_path = os. path.join('complex_sine_data', f'comp_sine_123_{n_samples}_{dim}.csv')
+  print(f'The data is from: {data_path}')
+  ori_data = np.loadtxt(data_path, delimiter = ",",skiprows = 1)
 
   print(f'The shape of the original data is now {ori_data.shape}')
         

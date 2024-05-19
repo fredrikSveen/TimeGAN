@@ -30,10 +30,10 @@ parameters['num_layer'] = 3
 parameters['batch_size'] = 128
 
 ## Data loading
-data_name = 'sine'
+data_name = 'complex_sine'
 seq_len = 100
 n_samples = 1000
-n_iterations_list = [100000]
+n_iterations_list = [50000, 100000]
 dim = 6
 
 
