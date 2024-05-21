@@ -37,7 +37,7 @@ def timegan (ori_data, parameters, reproduce=False):
     - generated_data: generated time-series data
   """
   # Set the global seed for reproducibility
-  tf.random.set_seed(123)
+  tf.random.set_random_seed(123)
 
   # Initialization on the Graph
   tf.reset_default_graph()
