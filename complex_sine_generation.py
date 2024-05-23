@@ -54,7 +54,7 @@ for n_iterations in n_iterations_list:
 
     timestamp = x.strftime("%d%m%y_%Hh%M")
     # generated_df = list_to_df(generated_data)
-    filepath = f'complex_synthetic_sines/comp_syn_sine_{n_iterations}_{dim}_{seq_len}_{timestamp}.json'
+    filepath = f'complex_synthetic_sines/comp_syn_sine_rep2_{n_iterations}_{dim}_{seq_len}_{timestamp}.json'
     with open(filepath, 'w') as file:
         json.dump(generated_data.tolist(), file)
 
