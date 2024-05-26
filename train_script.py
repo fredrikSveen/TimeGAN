@@ -52,7 +52,7 @@ parameters = dict()
 parameters['module'] = 'gru' 
 parameters['hidden_dim'] = 24
 parameters['num_layer'] = 3
-parameters['iterations'] = 1000
+parameters['iterations'] = 10000
 parameters['batch_size'] = 128
 
 # Run TimeGAN
