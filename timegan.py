@@ -311,20 +311,20 @@ def timegan (ori_data, parameters, reproduce=False):
   gen_data_df1.to_csv(f'generated_dataframes/frame1_{timestamp}.csv')
   gen_data_df2.to_csv(f'generated_dataframes/frame2_{timestamp}.csv')
 
-  ## Save the trained model
-  saver.save(sess, 'trained_models/model1')  
+  # ## Save the trained model
+  # saver.save(sess, 'trained_models/model1')  
     
-  generated_data = list()
+  # generated_data = list()
     
-  for i in range(no):
-    temp = generated_data_curr[i,:ori_time[i],:]
-    generated_data.append(temp)
+  # for i in range(no):
+  #   temp = generated_data_curr[i,:ori_time[i],:]
+  #   generated_data.append(temp)
         
-  # Renormalization
-  generated_data = generated_data * max_val
-  generated_data = generated_data + min_val
+  # # Renormalization
+  # generated_data = generated_data * max_val
+  # generated_data = generated_data + min_val
     
-  return generated_data
+  return generated_data_curr
 
 
 def timegan_from_pretrained(modelname, ori_data, parameters, reproduce=False):

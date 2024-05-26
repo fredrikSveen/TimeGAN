@@ -27,7 +27,7 @@ from utils import list_to_df
 st = time.time()
 
 ## Data loading
-data_name = 'sine'
+data_name = 'sensor'
 try:
   seq_len = int(sys.argv[1])
   print(f'Sequence length: {seq_len}')
@@ -52,7 +52,7 @@ parameters = dict()
 parameters['module'] = 'gru' 
 parameters['hidden_dim'] = 24
 parameters['num_layer'] = 3
-parameters['iterations'] = 10000
+parameters['iterations'] = 1000
 parameters['batch_size'] = 128
 
 # Run TimeGAN
@@ -64,7 +64,7 @@ x = datetime.datetime.now()
 
 timestamp = x.strftime("%d_%m_%y__%Hh%M")
 # generated_df = list_to_df(generated_data)
-filepath = f'generated_data/gen_{data_name}_norm{timestamp}.json'
+filepath = f'generated_data/gen_{data_name}_{timestamp}.json'
 with open(filepath, 'w') as file:
     json.dump(generated_data.tolist(), file)
 
