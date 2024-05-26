@@ -111,7 +111,8 @@ def real_data_loading (data_name, seq_len):
   for i in range(0, len(ori_data) - seq_len):
     _x = ori_data[i:i + seq_len]
     temp_data.append(_x)
-        
+  temp_data = np.array(temp_data)
+
   # # Mix the datasets (to make it similar to i.i.d)
   # idx = np.random.permutation(len(temp_data))    
   # data = []
@@ -119,7 +120,7 @@ def real_data_loading (data_name, seq_len):
   #   data.append(temp_data[idx[i]])
   filepath = 'exp3/windowed_sensor_data_norm2_indexless_10days.csv'
   with open(filepath, 'w') as file:
-    json.dump(list(temp_data), file)
+    json.dump(temp_data.tolist(), file)
     
   return temp_data
 
