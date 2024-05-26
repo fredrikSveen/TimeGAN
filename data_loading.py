@@ -119,7 +119,7 @@ def real_data_loading (data_name, seq_len):
   #   data.append(temp_data[idx[i]])
   filepath = 'exp3/windowed_sensor_data_norm2_indexless_10days.csv'
   with open(filepath, 'w') as file:
-    json.dump(temp_data, file)
+    json.dump(temp_data.tolist(), file)
     
   return temp_data
 
