@@ -65,6 +65,7 @@ x = datetime.datetime.now()
 timestamp = x.strftime("%d_%m_%y__%Hh%M")
 # generated_df = list_to_df(generated_data)
 filepath = f'exp3/gen_{data_name}_{seq_len}_{timestamp}.json'
+print(f'Generated data saved to file: {filepath}')
 with open(filepath, 'w') as file:
     json.dump(generated_data.tolist(), file)
 
