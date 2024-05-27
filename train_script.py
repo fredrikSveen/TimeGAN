@@ -45,15 +45,16 @@ elif data_name == 'sine':
 print(data_name + ' dataset is ready.')
 
 
-
 ## Newtork parameters
 parameters = dict()
 
 parameters['module'] = 'gru' 
 parameters['hidden_dim'] = 24
 parameters['num_layer'] = 3
-parameters['iterations'] = 10000
+parameters['iterations'] = 50000
 parameters['batch_size'] = 128
+
+n_iterations = parameters['iterations']
 
 # Run TimeGAN
 generated_data = timegan(ori_data, parameters, reproduce=False)   
@@ -64,7 +65,7 @@ x = datetime.datetime.now()
 
 timestamp = x.strftime("%d_%m_%y__%Hh%M")
 # generated_df = list_to_df(generated_data)
-filepath = f'exp3/gen_{data_name}_{seq_len}_{timestamp}.json'
+filepath = f'exp3/gen_{data_name}_{seq_len}_{n_iterations}_{timestamp}.json'
 print(f'Generated data saved to file: {filepath}')
 with open(filepath, 'w') as file:
     json.dump(generated_data.tolist(), file)
@@ -81,3 +82,4 @@ h = round(elapsed_time//(60*60), 0)
 m = round((elapsed_time - h*(60*60))//60, 0)
 s = round(elapsed_time - h*(60*60) - m*60,1)
 print(f'Execution time: {h}h{m}m{s}s')
+print(f'Finished at: {timestamp}')
