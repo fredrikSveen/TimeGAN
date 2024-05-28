@@ -51,7 +51,7 @@ parameters = dict()
 parameters['module'] = 'gru' 
 parameters['hidden_dim'] = 24
 parameters['num_layer'] = 3
-parameters['iterations'] = 50000
+parameters['iterations'] = 100000
 parameters['batch_size'] = 128
 
 n_iterations = parameters['iterations']
