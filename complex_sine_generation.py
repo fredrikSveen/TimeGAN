@@ -33,7 +33,7 @@ parameters['batch_size'] = 128
 data_name = 'complex_sine'
 seq_len = 100
 n_samples = 1000
-n_iterations_list = [1000, 10000, 50000, 100000]
+n_iterations_list = [500000]
 dim = 6
 
 
@@ -54,7 +54,7 @@ for n_iterations in n_iterations_list:
 
     timestamp = x.strftime("%d%m%y_%Hh%M")
     # generated_df = list_to_df(generated_data)
-    filepath = f'complex_synthetic_sines/comp_syn_sine_rep2_{n_iterations}_{dim}_{seq_len}_{timestamp}.json'
+    filepath = f'complex_synthetic_sines/comp_syn_sine_rep3_{n_iterations}_{dim}_{seq_len}_{timestamp}.json'
     with open(filepath, 'w') as file:
         json.dump(generated_data.tolist(), file)
 
